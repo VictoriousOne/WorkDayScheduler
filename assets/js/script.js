@@ -3,7 +3,7 @@ var savedEvents ;
 
 function loadEvents() {
 
-    savedEvents = JSON.parse(localStorage.getItem("events"));
+    savedEvents = JSON.parse(localStorage.getItem("calEvents"));
     if (!savedEvents) {
         savedEvents = [];
         return;
@@ -27,14 +27,29 @@ function storeData() {
         activity: ""
     }
 
-    //var btnHour = this.getAttribute("data-hour");
+    
     timeSlot.time = this.getAttribute("data-hour");
     console.log(timeSlot.time);
-    //var textArea = $("textarea").find("[data-hour='" + btnHour + "']");
+    
     textArea = $('textarea[data-hour='  + timeSlot.time +']');
     timeSlot.activity = $('textarea[data-hour='  + timeSlot.time +']').val();
     console.log(timeSlot.activity);
-    textArea.addClass("past");
+    //textArea.addClass("past");
+
+    var dupTime = savedEvents.findIndex(x => x.time == timeSlot.time);
+    console.log("dupTime is " + dupTime);
+
+    if (!(dupTime == -1)) {
+        localStorage.removeItem('calEvents');
+        savedEvents[dupTime].time = timeSlot.time;
+        savedEvents[dupTime].activity = timeSlot.activity;
+        localStorage.setItem('calEvents', JSON.stringify(savedEvents));
+    }
+    else {
+        savedEvents.push(timeSlot);
+        localStorage.setItem('calEvents', JSON.stringify(savedEvents));
+    }
+    
 }
 
 $("#calendar").on("click", "textarea", saveData);
