@@ -8,6 +8,7 @@ function timeAudit() {
     var amORpm;
     var curTime = moment().format("MM-DD-YYY h:mm a");
     var theDate = moment().format("MM-DD-YYYY").toString();
+    var curHour = moment().hour();
     console.log(theDate);
 
     console.log("curTime is " + curTime);
@@ -19,10 +20,11 @@ function timeAudit() {
         else {
             amORpm = "PM";
         }
-        calTime = (this.getAttribute("data-hour")).toString() + ':00' + amORpm;
+        //calTime = (this.getAttribute("data-hour")).toString() + ':00' + amORpm;
+        calTime = parseInt(this.getAttribute("data-hour"));
         console.log("This is calTime before moment " + calTime);
 
-        calTime = moment(theDate + " " + calTime, 'MM-DD-YYYY h:mm a').format('MM-DD-YYYY h:mm a');
+        //calTime = moment(theDate + " " + calTime, 'MM-DD-YYYY h:mm a').format('MM-DD-YYYY h:mm a');
         console.log("CalTime after date " + calTime);
         
         
@@ -31,10 +33,10 @@ function timeAudit() {
 
         console.log(this);
 
-        if (calTime < curTime) {
+        if (calTime < curHour) {
             $(this).addClass("past");
         }
-        else if (calTime > curTime) {
+        else if (calTime > curHour) {
             $(this).addClass("future");
         }
         else {
