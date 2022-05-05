@@ -10,6 +10,10 @@ for the event to occur, the time block will be green.
 # Technologies
 Bootstrap, JQuery, Moment js
 
+# Screen Shot
+
+![Work_Day_Scheduler](https://user-images.githubusercontent.com/71474934/166911131-f9407c7a-e942-44ee-8ad9-12e0455854b4.jpg)
+
 # Application link
 https://victoriousone.github.io/WorkDayScheduler/
 
